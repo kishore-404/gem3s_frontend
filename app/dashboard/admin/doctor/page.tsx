@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import AddDoctorModal from '@/app/components/AddDoctorModal'; // Check your import path
+import AddDoctorModal from '@/app/components/AddDoctorModal'; 
 import API from '@/services/api';
 
 export default function AdminDoctorsPage() {
@@ -9,7 +9,6 @@ export default function AdminDoctorsPage() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  // State to track which doctor card is expanded on mobile
   const [expandedDocId, setExpandedDocId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -22,7 +21,6 @@ export default function AdminDoctorsPage() {
     
       const response = await API.get('/doctor');
       
-      // Axios stores the JSON response inside the `.data` property
       setDoctors(response.data); 
     } catch (err) {
       console.error('Failed to fetch doctors:', err);
@@ -37,8 +35,7 @@ export default function AdminDoctorsPage() {
 
   return (
     <div className="w-full">
-      
-      {/* Header Row */}
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <h1 className="text-gray-800 font-serif text-lg md:text-xl">
           total number of Doctors : {loading ? '...' : doctors.length}
@@ -52,7 +49,6 @@ export default function AdminDoctorsPage() {
         </button>
       </div>
 
-      {/* --- DESKTOP VIEW: Standard Table (Hidden on small screens) --- */}
       <div className="hidden md:block w-full border-[2px] border-gray-300 rounded-[20px] overflow-hidden shadow-sm bg-white">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[600px] text-center border-collapse">
@@ -85,7 +81,6 @@ export default function AdminDoctorsPage() {
         </div>
       </div>
 
-      {/* --- MOBILE VIEW: Accordion Cards (Hidden on md and larger) --- */}
       <div className="md:hidden flex flex-col gap-3">
         {loading ? (
           <div className="p-6 text-center text-gray-400 border-[2px] border-gray-300 rounded-[20px] bg-white">
@@ -101,14 +96,12 @@ export default function AdminDoctorsPage() {
               key={doctor._id} 
               className="border-[2px] border-gray-300 rounded-[16px] overflow-hidden bg-white shadow-sm transition-all duration-300"
             >
-              {/* Card Header (Always Visible) */}
               <button 
                 onClick={() => toggleExpand(doctor._id)}
                 className="w-full flex justify-between items-center p-5 bg-white hover:bg-gray-50 focus:outline-none"
               >
                 <span className="font-serif text-lg text-gray-800">{doctor.name}</span>
-                
-                {/* Expand/Collapse Icon */}
+
                 <div className={`transform transition-transform duration-300 text-gray-500 ${expandedDocId === doctor._id ? 'rotate-180' : ''}`}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -116,7 +109,6 @@ export default function AdminDoctorsPage() {
                 </div>
               </button>
 
-              {/* Card Body (Expanded Details) */}
               <div 
                 className={`transition-all duration-300 ease-in-out ${
                   expandedDocId === doctor._id ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
@@ -145,7 +137,6 @@ export default function AdminDoctorsPage() {
       <AddDoctorModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        // Calling fetchDoctors here ensures the table updates immediately after saving a new doctor
         onSuccess={fetchDoctors} 
       />
 

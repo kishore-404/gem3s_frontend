@@ -21,12 +21,11 @@ export default function Register() {
     try {
       setLoading(true);
       
-      // Simulated API Call
       await API.post('/auth/register', form);
       
       setTimeout(() => {
         alert('Registered successfully');
-        router.push('/login'); // Redirect to login after successful registration
+        router.push('/login');
         setLoading(false);
       }, 1000);
 
@@ -39,15 +38,11 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-white font-sans flex flex-col">
-      
-      {/* Navbar Component */}
+    
       <Navbar />
 
-
-      {/* Main Registration Area */}
       <main className="flex-1 flex flex-col items-center justify-center p-4">
-        
-        {/* Register Card */}
+  
         <div className="w-full max-w-[480px] border border-gray-300 rounded-[32px] px-8 py-10 bg-white">
           
           <div className="text-center mb-8">
@@ -60,8 +55,7 @@ export default function Register() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5 px-4">
-            
-            {/* Name Input */}
+         
             <div>
               <input
                 type="text"
@@ -73,7 +67,6 @@ export default function Register() {
               />
             </div>
 
-            {/* Email Input */}
             <div className="relative">
               <input
                 type="email"
@@ -83,13 +76,6 @@ export default function Register() {
                 required
                 className="w-full px-6 py-3.5 rounded-full border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-colors shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] pr-12"
               />
-              {/* Visual Eye Icon matching the design */}
-              <div className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                  <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
-                </svg>
-              </div>
             </div>
 
             {/* Password Input */}
@@ -122,7 +108,6 @@ export default function Register() {
               </button>
             </div>
 
-            {/* Register Button */}
             <div className="flex justify-center pt-4">
               <button
                 type="submit"
@@ -136,7 +121,6 @@ export default function Register() {
           </form>
         </div>
 
-        {/* Footer Text */}
         <div className="mt-6 text-[15px] font-medium text-gray-800">
            Don't have an account?{' '}
            <a href="/login" className="text-[#da292e] hover:underline">

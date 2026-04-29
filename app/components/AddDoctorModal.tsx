@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-// Replace with your actual API import
 import API from '@/services/api';
 
 interface AddDoctorModalProps {
@@ -26,7 +24,6 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
     timeZone: '',
   });
 
-  // Clear errors when modal opens/closes
   useEffect(() => {
     if (isOpen) {
       setErrors({});
@@ -36,7 +33,7 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
 
   if (!isOpen) return null;
 
-  // Custom Form Validation checking ALL fields at once
+
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
@@ -45,15 +42,10 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
     if (!form.startTime) newErrors.startTime = 'Start time is required.';
     if (!form.endTime) newErrors.endTime = 'End time is required.';
     if (!form.timeZone) newErrors.timeZone = 'Please select a time zone.';
-
-    // Time logic validation
     if (form.startTime && form.endTime && form.startTime >= form.endTime) {
       newErrors.endTime = 'End time must be after start time.';
     }
-
     setErrors(newErrors);
-    
-    // Return true if there are NO errors
     return Object.keys(newErrors).length === 0;
   };
 
@@ -61,7 +53,6 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
     e.preventDefault();
     setGlobalError(null);
 
-    // Run Validation
     if (!validateForm()) {
       return;
     }
@@ -75,7 +66,6 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
         onSuccess();
         onClose();
         setLoading(false);
-        // Reset form after successful submission
         setForm({
           name: '',
           specialization: '',
@@ -91,7 +81,6 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
     }
   };
 
-  // Helper function to clear a specific error when the user starts typing
   const clearError = (field: string) => {
     if (errors[field]) {
       setErrors({ ...errors, [field]: '' });
@@ -100,16 +89,15 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/30 backdrop-blur-[2px] p-4 overflow-y-auto">
-      {/* Modal Container */}
+     
       <div className="bg-white w-full max-w-3xl rounded-[20px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] p-8 md:p-12 animate-in fade-in zoom-in-95 duration-200 border-[2px] border-gray-200 my-auto">
         
-        {/* Header */}
+       
         <h2 className="text-4xl font-serif text-black mb-10 tracking-wide">Doctor</h2>
 
-        {/* noValidate added to prevent default browser tooltips */}
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
           
-          {/* Name Row */}
+          
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Name</label>
             <div className="flex-1 flex flex-col">
@@ -126,7 +114,7 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
             </div>
           </div>
 
-          {/* Specialization Row */}
+          
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Specialization</label>
             <div className="flex-1 flex flex-col">
@@ -143,12 +131,12 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
             </div>
           </div>
 
-          {/* Working Time Row */}
+         
           <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
-            <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-1">Working time</label>
+            <label className=" text-[20px] font-serif text-black md:pt-1">Working time</label>
             <div className="flex-1 flex flex-col xl:flex-row items-start gap-6 xl:gap-10">
               
-              {/* Start Time */}
+              
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
                   <span className="font-serif text-black text-[20px]">Start time</span>
@@ -165,7 +153,7 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
                 {errors.startTime && <span className="text-[#da292e] text-sm mt-1 ml-[100px] font-medium">{errors.startTime}</span>}
               </div>
 
-              {/* End Time */}
+              
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
                   <span className="font-serif text-black text-[20px]">End time :</span>
@@ -185,7 +173,7 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
             </div>
           </div>
 
-          {/* Time Zone Row */}
+         
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Time Zone</label>
             <div className="flex-1 flex flex-col">
@@ -203,7 +191,7 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
                   <option value="UTC">UTC (Universal Time)</option>
                   <option value="EST">EST (Eastern Standard Time)</option>
                 </select>
-                {/* Custom Dropdown Arrow */}
+               
                 <div className="pointer-events-none absolute inset-y-0 right-6 flex items-center text-gray-400">
                   <svg className="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -214,7 +202,6 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
             </div>
           </div>
 
-          {/* Global Error Message from API */}
           {globalError && (
             <div className="flex justify-center md:justify-end md:pr-10 pt-2 animate-in fade-in slide-in-from-bottom-2">
               <p className="text-[#da292e] font-medium text-center md:text-right flex items-center gap-2 bg-red-50 px-4 py-2 rounded-lg border border-red-100">
@@ -226,7 +213,6 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
             </div>
           )}
 
-          {/* Buttons Row */}
           <div className="pt-6 flex flex-col sm:flex-row justify-center gap-4 md:gap-8">
             <button
               type="button"

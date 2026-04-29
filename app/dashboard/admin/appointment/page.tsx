@@ -20,18 +20,15 @@ export default function AdminAppointmentsPage() {
       
       const rawData = response.data;
 
-      // 1. Sort the array by Date first, then by Start Time
       const sortedAppointments = rawData.sort((a: any, b: any) => {
         // Compare Dates
         const dateA = new Date(a.date).getTime();
         const dateB = new Date(b.date).getTime();
         
         if (dateA !== dateB) {
-          return dateA - dateB; // Earliest date first
+          return dateA - dateB; 
         }
 
-        // If dates are the same, compare Start Times
-        // We can safely string compare "10:00" vs "14:30"
         if (a.startTime < b.startTime) return -1;
         if (a.startTime > b.startTime) return 1;
         return 0;
@@ -49,7 +46,6 @@ export default function AdminAppointmentsPage() {
     setExpandedApptId(expandedApptId === id ? null : id);
   };
 
-  // 2. Helper function to format "YYYY-MM-DD" to "DD/MM/YYYY"
   const formatDateToDDMMYYYY = (dateString: string) => {
     if (!dateString) return '';
     const [year, month, day] = dateString.split('-');
@@ -74,7 +70,6 @@ export default function AdminAppointmentsPage() {
         </h1>
       </div>
 
-      {/* --- DESKTOP VIEW --- */}
       <div className="hidden md:block w-full border-[2px] border-gray-300 rounded-[20px] overflow-hidden shadow-sm bg-white">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[600px] text-center border-collapse">
@@ -120,7 +115,6 @@ export default function AdminAppointmentsPage() {
         </div>
       </div>
 
-      {/* --- MOBILE VIEW --- */}
       <div className="md:hidden flex flex-col gap-3">
         {loading ? (
           <div className="p-6 text-center text-gray-400 border-[2px] border-gray-300 rounded-[20px] bg-white">
@@ -166,7 +160,6 @@ export default function AdminAppointmentsPage() {
                   </div>
                   <div className="flex justify-between border-b border-gray-200 pb-2">
                     <span className="text-gray-500">Date</span>
-                    {/* Applied DD/MM/YYYY formatting here */}
                     <span className="font-medium text-gray-800">{formatDateToDDMMYYYY(appt.date)}</span>
                   </div>
                   <div className="flex justify-between border-b border-gray-200 pb-2">

@@ -13,10 +13,8 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
   const [loading, setLoading] = useState(false);
   const [doctors, setDoctors] = useState<any[]>([]);
   
-  // Changed from a single string to an object holding multiple errors
   const [errors, setErrors] = useState<{ [key: string]: string }>({}); 
-  const [globalError, setGlobalError] = useState<string | null>(null); // For the API overlap error
-  
+  const [globalError, setGlobalError] = useState<string | null>(null); 
   const [form, setForm] = useState({
     doctorId: '',
     date: '',
@@ -27,7 +25,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
     problem: '',
   });
 
-  // Get today's date in YYYY-MM-DD format to disable past dates in the calendar picker
+ 
   const todayDateStr = new Date().toISOString().split('T')[0];
 
   useEffect(() => {
@@ -48,7 +46,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
 
   if (!isOpen) return null;
 
-  // Custom Form Validation checking ALL fields at once
+
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
@@ -60,7 +58,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
     if (!form.age) newErrors.age = 'Age is required.';
     if (!form.problem.trim()) newErrors.problem = 'Problem description is required.';
 
-    // Date validation (Double checking past dates)
+   
     if (form.date) {
       const selectedDate = new Date(form.date);
       const today = new Date();
@@ -70,14 +68,14 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
       }
     }
 
-    // Time validation
+    
     if (form.startTime && form.endTime && form.startTime >= form.endTime) {
       newErrors.endTime = 'End time must be after the start time.';
     }
 
     setErrors(newErrors);
     
-    // Return true if there are NO errors
+    
     return Object.keys(newErrors).length === 0;
   };
 
@@ -85,7 +83,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
     e.preventDefault();
     setGlobalError(null); 
 
-    // Run Validation - If it returns false, stop submission
+   
     if (!validateForm()) {
       return;
     }
@@ -110,7 +108,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
     }
   };
 
-  // Helper function to clear a specific error when the user starts typing
+ 
   const clearError = (field: string) => {
     if (errors[field]) {
       setErrors({ ...errors, [field]: '' });
@@ -119,15 +117,15 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/30 backdrop-blur-[2px] p-4 overflow-y-auto">
-      {/* Modal Container */}
+    
       <div className="bg-white w-full max-w-3xl rounded-[20px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] p-8 md:p-12 animate-in fade-in zoom-in-95 duration-200 border-[2px] border-gray-200 my-auto">
         
-        {/* Header */}
+        
         <h2 className="text-4xl font-serif text-black mb-10 tracking-wide">Appointments</h2>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
           
-          {/* Doctor Dropdown */}
+          
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Doctor</label>
             <div className="flex-1 flex flex-col">
@@ -157,7 +155,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           </div>
 
-          {/* Date Input */}
+        
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Date</label>
             <div className="flex-1 flex flex-col">
@@ -175,12 +173,10 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           </div>
 
-          {/* Time Selection */}
+          
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-1">Select time</label>
             <div className="flex-1 flex flex-col xl:flex-row items-start gap-6 xl:gap-10">
-              
-              {/* Start Time */}
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
                   <span className="font-serif text-black text-[20px]">Start time :</span>
@@ -197,7 +193,6 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
                 {errors.startTime && <span className="text-[#da292e] text-sm mt-1 ml-[110px] font-medium">{errors.startTime}</span>}
               </div>
 
-              {/* End Time */}
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
                   <span className="font-serif text-black text-[20px]">End time :</span>
@@ -217,7 +212,6 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           </div>
 
-          {/* Patient Name */}
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Patient Name</label>
             <div className="flex-1 flex flex-col">
@@ -234,7 +228,6 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           </div>
 
-          {/* Age Row */}
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
             <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Age</label>
             <div className="flex-1 flex flex-col">
@@ -252,7 +245,6 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           </div>
 
-          {/* Problem Description */}
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8 pt-2">
             <div className="hidden md:block md:w-1/4"></div>
             <div className="flex-1 flex flex-col">
@@ -269,7 +261,6 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           </div>
 
-          {/* Global API Overlap Error Message */}
           {globalError && (
             <div className="flex justify-center md:justify-end md:pr-10 pt-2 animate-in fade-in slide-in-from-bottom-2">
               <p className="text-[#da292e] font-medium text-center md:text-right flex items-center gap-2 bg-red-50 px-4 py-2 rounded-lg border border-red-100">
@@ -281,7 +272,6 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           )}
 
-          {/* Buttons Row */}
           <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4 md:gap-8">
             <button
               type="button"

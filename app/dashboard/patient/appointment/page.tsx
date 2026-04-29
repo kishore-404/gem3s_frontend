@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import API from '@/services/api';
-import PatientBookModal from '@/app/components/PatientBookModal'; // Make sure this path is correct
+import PatientBookModal from '@/app/components/PatientBookModal';
 
 export default function PatientAppointmentsPage() {
   const [appointments, setAppointments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // State to track which appointment card is expanded on mobile
+
   const [expandedApptId, setExpandedApptId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -23,17 +22,15 @@ export default function PatientAppointmentsPage() {
       
       const rawData = response.data;
 
-      // 1. Sort the array by Date first, then by Start Time
       const sortedAppointments = rawData.sort((a: any, b: any) => {
-        // Compare Dates
+  
         const dateA = new Date(a.date).getTime();
         const dateB = new Date(b.date).getTime();
         
         if (dateA !== dateB) {
-          return dateA - dateB; // Earliest date first
+          return dateA - dateB; 
         }
 
-        // If dates are the same, compare Start Times
         if (a.startTime < b.startTime) return -1;
         if (a.startTime > b.startTime) return 1;
         return 0;
@@ -51,14 +48,12 @@ export default function PatientAppointmentsPage() {
     setExpandedApptId(expandedApptId === id ? null : id);
   };
 
-  // 2. Helper function to format "YYYY-MM-DD" to "DD/MM/YYYY"
   const formatDateToDDMMYYYY = (dateString: string) => {
     if (!dateString) return '';
     const [year, month, day] = dateString.split('-');
     return `${day}/${month}/${year}`;
   };
 
-  // Helper function to color-code the status
   const getStatusColor = (status: string) => {
     switch (status?.toLowerCase()) {
       case 'scheduled': return 'text-blue-600 bg-blue-50';
@@ -70,8 +65,7 @@ export default function PatientAppointmentsPage() {
 
   return (
     <div className="w-full">
-      
-      {/* Header Row */}
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <h1 className="text-gray-800 font-serif text-lg md:text-xl">
           total number of Appointment : {loading ? '...' : appointments.length}
@@ -85,7 +79,6 @@ export default function PatientAppointmentsPage() {
         </button>
       </div>
 
-      {/* --- DESKTOP VIEW: Standard Table (Hidden on small screens) --- */}
       <div className="hidden md:block w-full border-[2px] border-gray-300 rounded-[20px] overflow-hidden shadow-sm bg-white">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[600px] text-center border-collapse">
@@ -113,7 +106,6 @@ export default function PatientAppointmentsPage() {
                     </td>
                     <td className="py-10 px-4 text-gray-700 border-r border-gray-300">
                       <div className="flex flex-col">
-                        {/* Applied DD/MM/YYYY formatting here */}
                         <span>{formatDateToDDMMYYYY(appt.date)}</span>
                         <span className="text-sm text-gray-500">{appt.startTime} - {appt.endTime}</span>
                       </div>
@@ -130,8 +122,6 @@ export default function PatientAppointmentsPage() {
           </table>
         </div>
       </div>
-
-      {/* --- MOBILE VIEW: Accordion Cards (Hidden on md and larger) --- */}
       <div className="md:hidden flex flex-col gap-3">
         {loading ? (
           <div className="p-6 text-center text-gray-400 border-[2px] border-gray-300 rounded-[20px] bg-white">
@@ -147,7 +137,6 @@ export default function PatientAppointmentsPage() {
               key={appt._id} 
               className="border-[2px] border-gray-300 rounded-[16px] overflow-hidden bg-white shadow-sm transition-all duration-300"
             >
-              {/* Card Header (Always Visible) */}
               <button 
                 onClick={() => toggleExpand(appt._id)}
                 className="w-full flex justify-between items-center p-5 bg-white hover:bg-gray-50 focus:outline-none"
@@ -159,15 +148,12 @@ export default function PatientAppointmentsPage() {
                   </span>
                 </div>
                 
-                {/* Expand/Collapse Icon */}
                 <div className={`transform transition-transform duration-300 text-gray-500 ${expandedApptId === appt._id ? 'rotate-180' : ''}`}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                   </svg>
                 </div>
               </button>
-
-              {/* Card Body (Expanded Details) */}
               <div 
                 className={`transition-all duration-300 ease-in-out ${
                   expandedApptId === appt._id ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
@@ -200,7 +186,6 @@ export default function PatientAppointmentsPage() {
         )}
       </div>
 
-      {/* Booking Modal */}
       <PatientBookModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 

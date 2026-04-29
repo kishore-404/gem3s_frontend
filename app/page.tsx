@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-// If using standard Next.js Image component, you can import it:
 import Image from 'next/image';
 import Navbar from '@/app/components/navbar';
 import Doctors from '@/app/assets/doctor.png';
@@ -12,17 +11,12 @@ export default function HomePage() {
     <div className="min-h-screen bg-white font-sans flex flex-col overflow-hidden">
       
       <Navbar />
-
-      {/* Main Content Area */}
       <main className="flex-1 flex flex-col relative w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-8 lg:py-12 justify-center">
-        
-        {/* Top Hero Section (Text Left, Image Right) */}
+       
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 w-full">
-          
-          {/* Left Side: Typography */}
+       
           <div className="flex-1 flex flex-col items-start justify-center w-full order-2 lg:order-1  lg:mt-0">
-            
-            {/* Welcome Text */}
+         
             <div className="flex items-center gap-2 mb-2">
               <span className="text-gray-800 font-semibold text-lg md:text-xl">
                 Welcome to
@@ -30,11 +24,9 @@ export default function HomePage() {
              <Image src={logo} alt="Logo" className="h-8 w-auto" />
             </div>
 
-            {/* Main Headline */}
             <h1 className="flex flex-col items-start text-[36px] md:text-[48px] lg:text-[54px] font-serif leading-[1.15] text-black">
               <span>Delivering Smart</span>
-              
-              {/* Two-Tone Pill Background */}
+       
               <div className="inline-flex text-white mt-3 mb-3 text-[28px] md:text-[40px] lg:text-[46px] shadow-sm">
                 <span className="bg-gradient-to-r from-[#046F9A] to-[#DE282A] text-[26px] md:text-[40px] lg:text-[46px]  rounded-full py-1.5 md:py-2 px-6 md:px-8 text-white">
   Digital Health Solutions
@@ -46,7 +38,6 @@ export default function HomePage() {
             
           </div>
 
-          {/* Right Side: Image */}
           <div className="flex-1 w-full max-w-[600px] lg:max-w-none flex justify-center items-end order-1 lg:order-2 relative">
            
             <Image 
@@ -58,7 +49,6 @@ export default function HomePage() {
 
         </div>
 
-        {/* Bottom Area: Call To Action Buttons */}
         <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10 mt-16 lg:mt-24 pb-10 z-10 relative">
           
           <Link href="/login" className="w-full sm:w-auto">
