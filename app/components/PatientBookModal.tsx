@@ -272,7 +272,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             </div>
           )}
 
-          <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4 md:gap-8">
+          <div className="pt-4 flex flex-col-reverse sm:flex-row justify-center gap-4 md:gap-8">
             <button
               type="button"
               onClick={onClose}

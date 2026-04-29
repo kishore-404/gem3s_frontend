@@ -54,10 +54,11 @@ export default function AdminDoctorsPage() {
           <table className="w-full min-w-[600px] text-center border-collapse">
             <thead>
               <tr className="border-b-[2px] border-gray-300 bg-white">
-                <th className="py-6 px-4 font-serif text-gray-800 font-normal border-r border-gray-300 w-1/4">Name</th>
-                <th className="py-6 px-4 font-serif text-gray-800 font-normal border-r border-gray-300 w-1/4">Specialization</th>
-                <th className="py-6 px-4 font-serif text-gray-800 font-normal border-r border-gray-300 w-1/4">Working Hour</th>
-                <th className="py-6 px-4 font-serif text-gray-800 font-normal w-1/4">Time Zone</th>
+                <th className="py-6 px-4 font-serif text-gray-800 font-normal border-r border-gray-300 w-1/5">Name</th>
+                <th className="py-6 px-4 font-serif text-gray-800 font-normal border-r border-gray-300 w-1/5">Specialization</th>
+                <th className="py-6 px-4 font-serif text-gray-800 font-normal border-r border-gray-300 w-1/5">Email</th>
+                <th className="py-6 px-4 font-serif text-gray-800 font-normal border-r border-gray-300 w-1/5">Working Hour</th>
+                <th className="py-6 px-4 font-serif text-gray-800 font-normal w-1/5">Time Zone</th>
               </tr>
             </thead>
             <tbody>
@@ -71,6 +72,7 @@ export default function AdminDoctorsPage() {
                   <tr key={doctor._id} className="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors">
                     <td className="py-10 px-4 text-gray-700 border-r border-gray-300">{doctor.name}</td>
                     <td className="py-10 px-4 text-gray-700 border-r border-gray-300">{doctor.specialization}</td>
+                    <td className="py-10 px-4 text-gray-700 border-r border-gray-300">{doctor.email}</td>
                     <td className="py-10 px-4 text-gray-700 border-r border-gray-300">{doctor.startTime} - {doctor.endTime}</td>
                     <td className="py-10 px-4 text-gray-700">{doctor.timeZone}</td>
                   </tr>
@@ -118,6 +120,10 @@ export default function AdminDoctorsPage() {
                   <div className="flex justify-between border-b border-gray-200 pb-2">
                     <span className="text-gray-500">Specialization</span>
                     <span className="font-medium text-gray-800">{doctor.specialization}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-gray-200 pb-2">
+                    <span className="text-gray-500">Email</span>
+                    <span className="font-medium text-gray-800">{doctor.email}</span>
                   </div>
                   <div className="flex justify-between border-b border-gray-200 pb-2">
                     <span className="text-gray-500">Working Hours</span>

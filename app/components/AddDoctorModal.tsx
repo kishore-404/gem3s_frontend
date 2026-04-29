@@ -18,6 +18,7 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
 
   const [form, setForm] = useState({
     name: '',
+    email:'',
     specialization: '',
     startTime: '',
     endTime: '',
@@ -68,17 +69,27 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
         setLoading(false);
         setForm({
           name: '',
+          email: '',
           specialization: '',
           startTime: '',
           endTime: '',
           timeZone: '',
         });
       }, 500);
-    } catch (error) {
-      console.error('Failed to add doctor', error);
-      setGlobalError('Failed to add doctor. Please try again.');
-      setLoading(false);
-    }
+    } catch (error: any) {
+  console.error('Failed to add doctor', error);
+
+  if (error.response?.status === 409) {
+    setErrors((prev) => ({
+      ...prev,
+      email: 'Email already exists', 
+    }));
+  } else {
+    setGlobalError('Failed to add doctor. Please try again.');
+  }
+
+  setLoading(false);
+}
   };
 
   const clearError = (field: string) => {
@@ -131,7 +142,29 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
             </div>
           </div>
 
-         
+         <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
+  <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Email</label>
+  <div className="flex-1 flex flex-col">
+    <input
+      type="email"
+      className={`w-full rounded-full border px-6 py-3.5 ${
+        errors.email
+          ? 'border-[#da292e] bg-red-50'
+          : 'border-gray-300 bg-white'
+      }`}
+      onChange={(e) => {
+        setForm({ ...form, email: e.target.value });
+        clearError('email');
+      }}
+      value={form.email}
+    />
+    {errors.email && (
+      <span className="text-[#da292e] text-sm mt-1.5 ml-4 font-medium">
+        {errors.email}
+      </span>
+    )}
+  </div>
+</div>
           <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
             <label className=" text-[20px] font-serif text-black md:pt-1">Working time</label>
             <div className="flex-1 flex flex-col xl:flex-row items-start gap-6 xl:gap-10">
@@ -213,7 +246,7 @@ export default function AddDoctorModal({ isOpen, onClose, onSuccess }: AddDoctor
             </div>
           )}
 
-          <div className="pt-6 flex flex-col sm:flex-row justify-center gap-4 md:gap-8">
+          <div className="pt-6 flex  flex-col-reverse sm:flex-row justify-center gap-4 md:gap-8">
             <button
               type="button"
               onClick={onClose}
