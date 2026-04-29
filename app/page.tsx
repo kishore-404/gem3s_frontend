@@ -1,64 +1,80 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import Link from 'next/link';
+// If using standard Next.js Image component, you can import it:
+import Image from 'next/image';
+import Navbar from '@/app/components/navbar';
+import Doctors from '@/app/assets/doctor.png';
+import logo from "@/public/logo.png"
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="min-h-screen bg-white font-sans flex flex-col overflow-hidden">
+      
+      <Navbar />
+
+      {/* Main Content Area */}
+      <main className="flex-1 flex flex-col relative w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-8 lg:py-12 justify-center">
+        
+        {/* Top Hero Section (Text Left, Image Right) */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 w-full">
+          
+          {/* Left Side: Typography */}
+          <div className="flex-1 flex flex-col items-start justify-center w-full order-2 lg:order-1  lg:mt-0">
+            
+            {/* Welcome Text */}
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-gray-800 font-semibold text-lg md:text-xl">
+                Welcome to
+              </span>
+             <Image src={logo} alt="Logo" className="h-8 w-auto" />
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="flex flex-col items-start text-[36px] md:text-[48px] lg:text-[54px] font-serif leading-[1.15] text-black">
+              <span>Delivering Smart</span>
+              
+              {/* Two-Tone Pill Background */}
+              <div className="inline-flex text-white mt-3 mb-3 text-[28px] md:text-[40px] lg:text-[46px] shadow-sm">
+                <span className="bg-gradient-to-r from-[#046F9A] to-[#DE282A] text-[26px] md:text-[40px] lg:text-[46px]  rounded-full py-1.5 md:py-2 px-6 md:px-8 text-white">
+  Digital Health Solutions
+</span>
+              </div>
+              
+              <span>That Drive Growth</span>
+            </h1>
+            
+          </div>
+
+          {/* Right Side: Image */}
+          <div className="flex-1 w-full max-w-[600px] lg:max-w-none flex justify-center items-end order-1 lg:order-2 relative">
+           
+            <Image 
+              src={Doctors} 
+              alt="Medical Team" 
+              className="w-full h-auto object-contain max-h-[400px] lg:max-h-[550px] drop-shadow-xl"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+
         </div>
+
+        {/* Bottom Area: Call To Action Buttons */}
+        <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10 mt-16 lg:mt-24 pb-10 z-10 relative">
+          
+          <Link href="/login" className="w-full sm:w-auto">
+            <button className="w-full sm:w-[280px] bg-[#126b8a] hover:bg-[#0e566f] text-white font-serif text-[22px] tracking-wide py-4 px-10 rounded-full transition-transform hover:scale-105 duration-300 shadow-md">
+              LOGIN
+            </button>
+          </Link>
+
+          <Link href="/register" className="w-full sm:w-auto">
+            <button className="w-full sm:w-[280px] bg-[#da292e] hover:bg-[#c32227] text-white font-serif text-[22px] tracking-wide py-4 px-10 rounded-full transition-transform hover:scale-105 duration-300 shadow-md">
+              REGISTER
+            </button>
+          </Link>
+
+        </div>
+
       </main>
     </div>
   );
