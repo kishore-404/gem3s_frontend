@@ -121,17 +121,17 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
       <div className="bg-white w-full max-w-3xl rounded-[20px] shadow-[0_10px_40px_rgba(0,0,0,0.1)] p-8 md:p-12 animate-in fade-in zoom-in-95 duration-200 border-[2px] border-gray-200 my-auto">
         
         
-        <h2 className="text-4xl font-serif text-black mb-10 tracking-wide">Appointments</h2>
+        <h2 className="text-3xl font-serif text-black mb-10 tracking-wide">Appointments</h2>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-6">
           
           
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
-            <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Doctor</label>
+            <label className="md:w-1/4 text-base  md:text-lg font-serif text-black md:pt-3">Doctor</label>
             <div className="flex-1 flex flex-col">
               <div className="relative">
                 <select
-                  className={`w-full rounded-full border px-6 py-3.5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-lg appearance-none cursor-pointer transition-colors ${errors.doctorId ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50 text-gray-900' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white text-gray-600'}`}
+                  className={`w-full rounded-full border px-6 py-3.5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-base md:text-lg appearance-none cursor-pointer transition-colors ${errors.doctorId ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50 text-gray-900' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white text-gray-600'}`}
                   value={form.doctorId}
                   onChange={(e) => {
                     setForm({ ...form, doctorId: e.target.value });
@@ -157,32 +157,37 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
 
         
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
-            <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Date</label>
-            <div className="flex-1 flex flex-col">
-              <input
-                type="date"
-                min={todayDateStr}
-                className={`w-full rounded-full border px-6 py-3.5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-lg transition-colors ${errors.date ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50 text-gray-900' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white text-gray-600'}`}
-                onChange={(e) => {
-                  setForm({ ...form, date: e.target.value });
-                  clearError('date');
-                }}
-                value={form.date}
-              />
-              {errors.date && <span className="text-[#da292e] text-sm mt-1.5 ml-4 font-medium">{errors.date}</span>}
-            </div>
-          </div>
+  <label className="md:w-1/4 w-full text-base md:text-lg font-serif text-black md:pt-3">
+    Date
+  </label>
 
+  <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+    <input
+      type="date"
+      min={todayDateStr}
+      className={`appearance-none w-full max-w-full min-w-0 rounded-lg border px-6 py-3.5 focus:outline-none focus:ring-1 text-base md:text-lg transition-colors ${
+        errors.date
+          ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50 text-gray-900'
+          : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white text-gray-600'
+      }`}
+      onChange={(e) => {
+        setForm({ ...form, date: e.target.value });
+        clearError('date');
+      }}
+      value={form.date}
+    />
+  </div>
+</div>
           
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
-            <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-1">Select time</label>
+            <label className="md:w-1/4 text-base md:text-lg font-serif text-black md:pt-1">Select time</label>
             <div className="flex-1 flex flex-col xl:flex-row items-start gap-6 xl:gap-10">
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
-                  <span className="font-serif text-black text-[20px]">Start time :</span>
+                  <span className="font-serif text-black text-base md:text-lg">Start time :</span>
                   <input
                     type="time"
-                    className={`rounded-md border border-transparent px-3 py-1.5 focus:outline-none focus:ring-2 text-gray-600 text-lg shadow-inner w-32 transition-colors ${errors.startTime ? 'ring-2 ring-[#da292e] bg-red-50' : 'bg-gray-200 focus:ring-[#126b8a]'}`}
+                    className={`rounded-md border border-transparent px-3 py-1.5 focus:outline-none focus:ring-2 text-gray-600 text-base md:text-lg shadow-inner w-32 transition-colors ${errors.startTime ? 'ring-2 ring-[#da292e] bg-red-50' : 'bg-gray-200 focus:ring-[#126b8a]'}`}
                     onChange={(e) => {
                       setForm({ ...form, startTime: e.target.value });
                       clearError('startTime');
@@ -195,10 +200,10 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
 
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
-                  <span className="font-serif text-black text-[20px]">End time :</span>
+                  <span className="font-serif text-black text-base md:text-lg">End time :</span>
                   <input
                     type="time"
-                    className={`rounded-md border border-transparent px-3 py-1.5 focus:outline-none focus:ring-2 text-gray-600 text-lg shadow-inner w-32 transition-colors ${errors.endTime ? 'ring-2 ring-[#da292e] bg-red-50' : 'bg-gray-200 focus:ring-[#126b8a]'}`}
+                    className={`rounded-md border border-transparent px-3 py-1.5 focus:outline-none focus:ring-2 text-gray-600 text-base md:text-lg shadow-inner w-32 transition-colors ${errors.endTime ? 'ring-2 ring-[#da292e] bg-red-50' : 'bg-gray-200 focus:ring-[#126b8a]'}`}
                     onChange={(e) => {
                       setForm({ ...form, endTime: e.target.value });
                       clearError('endTime');
@@ -213,11 +218,11 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
           </div>
 
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
-            <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Patient Name</label>
+            <label className="md:w-1/4 text-base md:text-lg font-serif text-black md:pt-3">Patient Name</label>
             <div className="flex-1 flex flex-col">
               <input
                 type="text"
-                className={`w-full rounded-full border px-6 py-3.5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-lg transition-colors ${errors.patientName ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white'}`}
+                className={`w-full rounded-full border px-6 py-3.5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-base md:text-lg transition-colors ${errors.patientName ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white'}`}
                 onChange={(e) => {
                   setForm({ ...form, patientName: e.target.value });
                   clearError('patientName');
@@ -229,12 +234,12 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
           </div>
 
           <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
-            <label className="md:w-1/4 text-[20px] font-serif text-black md:pt-3">Age</label>
+            <label className="md:w-1/4 text-base md:text-lg font-serif text-black md:pt-3">Age</label>
             <div className="flex-1 flex flex-col">
               <input
                 type="number"
                 min="0"
-                className={`w-full rounded-full border px-6 py-3.5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-lg transition-colors ${errors.age ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white'}`}
+                className={`w-full rounded-full border px-6 py-3.5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-base md:text-lg transition-colors ${errors.age ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white'}`}
                 onChange={(e) => {
                   setForm({ ...form, age: e.target.value });
                   clearError('age');
@@ -250,7 +255,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
             <div className="flex-1 flex flex-col">
               <textarea
                 placeholder="Problem description"
-                className={`w-full rounded-[24px] border px-6 py-5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-lg min-h-[130px] resize-y placeholder-gray-400 font-serif transition-colors ${errors.problem ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white'}`}
+                className={`w-full rounded-[24px] border px-6 py-5 focus:outline-none focus:ring-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] text-base md:text-lg min-h-[130px] resize-y placeholder-gray-400 font-serif transition-colors ${errors.problem ? 'border-[#da292e] focus:border-[#da292e] focus:ring-[#da292e] bg-red-50' : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400 bg-white'}`}
                 onChange={(e) => {
                   setForm({ ...form, problem: e.target.value });
                   clearError('problem');

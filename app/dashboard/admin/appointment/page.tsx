@@ -153,7 +153,7 @@ export default function AdminAppointmentsPage() {
                   expandedApptId === appt._id ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <div className="p-5 border-t border-gray-200 bg-gray-50 flex flex-col gap-3 text-[15px]">
+                <div className="p-5 border-t border-gray-200 bg-gray-50 flex flex-col gap-3 text-base md:text-lg">
                   <div className="flex justify-between border-b border-gray-200 pb-2">
                     <span className="text-gray-500">Doctor</span>
                     <span className="font-medium text-gray-800">{appt.doctorId?.name || 'Unknown Doctor'}</span>

@@ -27,7 +27,7 @@ export default function HomePage() {
             <h1 className="flex flex-col items-start text-[36px] md:text-[48px] lg:text-[54px] font-serif leading-[1.15] text-black">
               <span>Delivering Smart</span>
        
-              <div className="inline-flex text-white mt-3 mb-3 text-[28px] md:text-[40px] lg:text-[46px] shadow-sm">
+              <div className="inline-flex text-white mt-3 mb-3  ">
                 <span className="bg-gradient-to-r from-[#046F9A] to-[#DE282A] text-[26px] md:text-[40px] lg:text-[46px]  rounded-full py-1.5 md:py-2 px-6 md:px-8 text-white">
   Digital Health Solutions
 </span>

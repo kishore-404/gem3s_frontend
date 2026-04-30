@@ -60,13 +60,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         `}>
           <div className="flex-1 flex flex-col">
             <Link href="/dashboard/admin/doctor" onClick={() => setIsMobileMenuOpen(false)}>
-              <div className={`w-full py-6 text-center font-serif text-[17px] transition-colors border-b border-gray-300 ${pathname.includes('/doctor') ? 'bg-[#126b8a] text-white' : 'text-gray-900 hover:bg-gray-50'}`}>
+              <div className={`w-full py-6 text-center font-serif text-base md:text-lg transition-colors border-b border-gray-300 ${pathname.includes('/doctor') ? 'bg-[#126b8a] text-white' : 'text-gray-900 hover:bg-gray-50'}`}>
                 Doctors
               </div>
             </Link>
 
             <Link href="/dashboard/admin/appointment" onClick={() => setIsMobileMenuOpen(false)}>
-              <div className={`w-full py-6 text-center font-serif text-[17px] transition-colors border-b border-gray-300 ${pathname.includes('/appointment') ? 'bg-[#126b8a] text-white' : 'text-gray-900 hover:bg-gray-50'}`}>
+              <div className={`w-full py-6 text-center font-serif text-base md:text-lg transition-colors border-b border-gray-300 ${pathname.includes('/appointment') ? 'bg-[#126b8a] text-white' : 'text-gray-900 hover:bg-gray-50'}`}>
                 Appointments
               </div>
             </Link>
@@ -74,7 +74,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <button 
             onClick={handleLogout} 
-            className="w-full py-5 bg-[#da292e] hover:bg-[#c32227] text-white text-lg font-serif tracking-wide transition-colors mt-auto"
+            className="w-full py-5 bg-[#da292e] hover:bg-[#c32227] text-white text-base md:text-lg font-serif tracking-wide transition-colors mt-auto"
           >
             Logout
           </button>
