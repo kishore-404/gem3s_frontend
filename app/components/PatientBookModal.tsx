@@ -47,7 +47,7 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
   if (!isOpen) return null;
 
 
-  const validateForm = () => {
+ const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
     if (!form.doctorId) newErrors.doctorId = 'Please select a doctor.';
@@ -68,14 +68,22 @@ export default function PatientBookModal({ isOpen, onClose, onSuccess }: Patient
       }
     }
 
-    
-    if (form.startTime && form.endTime && form.startTime >= form.endTime) {
-      newErrors.endTime = 'End time must be after the start time.';
+   
+    if (form.startTime && form.endTime) {
+      
+      const start = new Date(`1970-01-01T${form.startTime}`);
+      const end = new Date(`1970-01-01T${form.endTime}`);
+      
+      const durationInMinutes = (end.getTime() - start.getTime()) / (1000 * 60);
+
+      if (form.startTime >= form.endTime) {
+        newErrors.endTime = 'End time must be after the start time.';
+      } else if (durationInMinutes > 30) {
+        newErrors.endTime = 'Appointment duration cannot exceed 30 minutes.';
+      }
     }
 
     setErrors(newErrors);
-    
-    
     return Object.keys(newErrors).length === 0;
   };
 
